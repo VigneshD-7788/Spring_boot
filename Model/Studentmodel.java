@@ -21,11 +21,11 @@ public class Studentmodel {
     List<Book_historymodel> book_history;
 
     @ManyToMany
-    List<BookNamemodel> bookNames;
     @JoinTable(
             name = "author_table",
-            joinColumns = @JoinColumn(name= "id"),
+            joinColumns = @JoinColumn(name= "student_id"),
             inverseJoinColumns = @JoinColumn(name="book_id"))
+    List<BookNamemodel> bookNames;
 
     public List<BookNamemodel> getBookNames() {
         return bookNames;
