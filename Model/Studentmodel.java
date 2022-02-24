@@ -20,6 +20,20 @@ public class Studentmodel {
     @JoinColumn(name="student_id")
     List<Book_historymodel> book_history;
 
+    @ManyToMany
+    List<BookNamemodel> bookNames;
+    @JoinTable(
+            name = "author_table",
+            joinColumns = @JoinColumn(name= "id"),
+            inverseJoinColumns = @JoinColumn(name="book_id"))
+
+    public List<BookNamemodel> getBookNames() {
+        return bookNames;
+    }
+
+    public void setBookNames(List<BookNamemodel> bookNames) {
+        this.bookNames = bookNames;
+    }
 
     public String getRole() {
         return role;
