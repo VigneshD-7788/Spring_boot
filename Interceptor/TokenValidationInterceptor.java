@@ -35,13 +35,13 @@ public class TokenValidationInterceptor implements HandlerInterceptor {
            // peopleservice.checkTokenForUserId(id, token);//error may throw.
             studentservice.tokenDecode(token);
             studentservice.checkTokenForStudentId(student_id,token);
-            Integer student_id_int = Integer.parseInt(student_id);//string to int
-            String role = studentservice.getRole(student_id_int);
-            boolean check = studentservice.checkRoleAccess(current_url,role);
-            if(!check){
-                throw new Exception("Sorry,You don't have access");
-            }
-            logger.info("check {}",check);
+//            Integer student_id_int = Integer.parseInt(student_id);//string to int
+//            String role = studentservice.getRole(student_id_int);
+//            boolean check = studentservice.checkRoleAccess(current_url,role);
+//            if(!check){
+//                throw new Exception("Sorry,You don't have access");
+//            }
+//            logger.info("check {}",check);
 //            boolean check=ApiroleAcess.checkRole(role,current_url);
 //            if(!check){
 //                logger.info("check{}",current_url);

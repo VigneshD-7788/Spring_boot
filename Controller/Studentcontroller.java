@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -63,7 +64,7 @@ public class Studentcontroller {
     }
 
     @PostMapping("insertBookRequest")
-    public ResponseEntity insertBookRequest(@RequestBody Studentrequest studentrequest) {
+    public ResponseEntity insertBookRequest(@Valid @RequestBody Studentrequest studentrequest) {
         logger.info("START");
         Studentresponse res = new Studentresponse();
         try {

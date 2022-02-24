@@ -1,9 +1,12 @@
 package com.Springboot_web_rest.Request;
 
+import javax.validation.constraints.NotBlank;
+
 public class Studentrequest {
     Integer student_id;
     Integer book_id;
     String name,email,password;
+    @NotBlank(message = "type is Mandatory")
     String type;
 
     public Integer getBook_id() {
