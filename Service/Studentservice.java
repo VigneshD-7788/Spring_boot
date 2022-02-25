@@ -151,7 +151,9 @@ public class Studentservice {
         }
     }
     public List<Studentmodel> getAllStudents() {
+        logger.info("In Service");
         List<Studentmodel> studentModelList = studentrepos.findAll();//get all the data from the table.
+        logger.info("Out Service");
         return studentModelList;
     }
     public String getRole(Integer student_id){
