@@ -24,7 +24,7 @@ public class TokenValidationInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,Object handler) {
          String current_url = request.getRequestURL().toString();
          logger.info("Url is excluded {}",current_url);
-         if(current_url.contains("studentLogin")||current_url.contains("searchStudent")){
+         if(current_url.contains("studentLogin")||current_url.contains("studentRegister")){
              logger.info("Url is excluded {}",current_url);
              return true;
          }
