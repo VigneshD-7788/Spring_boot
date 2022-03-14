@@ -9,6 +9,7 @@ import com.Springboot_web_rest.Repos.BookHistoryRepos;
 import com.Springboot_web_rest.Repos.Rolerepos;
 import com.Springboot_web_rest.Repos.Studentrepos;
 import com.Springboot_web_rest.Request.Studentrequest;
+import com.Springboot_web_rest.Response.Studentresponse;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -83,21 +84,42 @@ public class Studentservice {
         return true;
     }
 
-    public HashMap<String, String> studentLogin(String email, String password) {
-        Optional<Studentmodel> studentModel = studentrepos.login(email, password);
-        HashMap<String, String> hashMap = new HashMap<>();
-        if (studentModel.isPresent()) {
-            Studentmodel studentmodel=studentModel.get();
-            String token = tokenGenerate(email,studentmodel.getName());
-            hashMap.put("Message:", "You are successfully login,Welcome to our book portal");
-            hashMap.put("Token:", token);
-            studentrepos.updateTokenByStudentID(token, studentModel.get().getStudent_id());
-            return hashMap;
+//    public HashMap<String, String> studentLogin(String email, String password) {
+//        Optional<Studentmodel> studentModel = studentrepos.login(email, password);
+//        HashMap<String, String> hashMap = new HashMap<>();
+//        if (studentModel.isPresent()) {
+//            Studentmodel studentmodel=studentModel.get();
+//            String token = tokenGenerate(email,studentmodel.getName());
+//            hashMap.put("Message:", "You are successfully login,Welcome to our book portal");
+//            hashMap.put("Token:", token);
+//            studentrepos.updateTokenByStudentID(token, studentModel.get().getStudent_id());
+//            return hashMap;
+//
+//        }
+//        hashMap.put("Message:", "login failed,Please try again.....");
+//        hashMap.put("Token:", "  ");
+//        return hashMap;
+//    }
 
+    public Studentresponse studentLogin(String email, String password) throws Exception {
+        logger.info("in");
+       Studentresponse studentresponse = new Studentresponse();
+        Optional<Studentmodel> model = this.studentrepos.login(email, password);
+        if (model.isPresent()) {
+            logger.info(studentresponse.getToken());
+            Studentmodel studentmodel = model.get();
+            String token = tokenGenerate(email, password);
+            studentresponse.setToken(token);
+            studentresponse.setName(studentmodel.getName());
+            studentresponse.setEmail(studentmodel.getEmail());
+            studentresponse.setProfile_image(studentmodel.getProfile_image());
+            studentresponse.setStudent_id(studentmodel.getStudent_id());
+            studentresponse.setMessage("You are successfully login,Welcome to our book portal");
+            studentrepos.updateTokenByStudentID(token, model.get().getStudent_id());
+            return studentresponse;
+        } else {
+            throw new Exception("Login failed, Please try again.....");
         }
-        hashMap.put("Message:", "login failed,Please try again.....");
-        hashMap.put("Token:", "  ");
-        return hashMap;
     }
 
     public boolean addBookRequest(Studentrequest studentrequest) throws Exception {

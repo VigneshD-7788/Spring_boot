@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 
 @RestController
 public class Studentcontroller {
@@ -49,17 +48,14 @@ public class Studentcontroller {
 
     @PostMapping("studentLogin")
     public ResponseEntity studentLogin(@RequestBody Studentrequest studentrequest) {
-        Studentresponse res = new Studentresponse();
         logger.info("Going to login");
         try {
             logger.info("login currently");
-            HashMap<String, String> hashMap = studentservice.studentLogin(studentrequest.getEmail(), studentrequest.getPassword());
-            res.setMessage("Login Successfully");
-            return ResponseEntity.ok(hashMap);
+             Studentresponse res = studentservice.studentLogin(studentrequest.getEmail(), studentrequest.getPassword());
+            return ResponseEntity.ok(res);
         } catch (Exception e) {
             logger.error(e.getMessage());
-            res.setMessage(e.getMessage());
-            return ResponseEntity.badRequest().body(res);
+           throw new RuntimeException(e.getMessage());
         }
     }
 
