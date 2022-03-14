@@ -6,7 +6,6 @@ public class Studentresponse {
     String message;
     String name;
     String email;
-    String password;
     String token;
     String profile_image;
 
@@ -32,14 +31,6 @@ public class Studentresponse {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getToken() {
