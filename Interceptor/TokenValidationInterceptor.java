@@ -28,13 +28,14 @@ public class TokenValidationInterceptor implements HandlerInterceptor {
              logger.info("Url is excluded {}",current_url);
              return true;
          }
-         String token = request.getHeader("token");
-         String  student_id = request.getHeader("student_id");
-        try {
+//         String token = request.getHeader("token");
+//         String  student_id = request.getHeader("student_id");
+//         logger.info("student_id{}{}",student_id,token);
+//        try {
             //peopleservice.tokenDecode(token);
            // peopleservice.checkTokenForUserId(id, token);//error may throw.
-            studentservice.tokenDecode(token);
-            studentservice.checkTokenForStudentId(student_id,token);
+//            studentservice.tokenDecode(token);
+//            studentservice.checkTokenForStudentId(student_id,token);
 //            Integer student_id_int = Integer.parseInt(student_id);//string to int
 //            String role = studentservice.getRole(student_id_int);
 //            boolean check = studentservice.checkRoleAccess(current_url,role);
@@ -52,10 +53,10 @@ public class TokenValidationInterceptor implements HandlerInterceptor {
 //            logger.info("checking {}",current_url);
             System.out.println("Request is fine..so can go to the controller.");
             return true;
-        } catch (Exception e) {
-            System.out.println("Exception " + e.getMessage());
-            throw new RuntimeException(e.getMessage());
-        }
+//        } catch (Exception e) {
+//            System.out.println("Exception " + e.getMessage());
+//            throw new RuntimeException(e.getMessage());
+//        }
     }
 
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView){
