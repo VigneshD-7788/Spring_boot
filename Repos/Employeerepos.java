@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface Employeerepos extends JpaRepository<Employeemodel,Integer> {
 
-    @Query("select count(em) from Employeemodel em")
-    Optional<Employeemodel> getTotalCount();
+    @Query("select count(em.employee_id) from Employeemodel em")
+    Optional<Employeemodel> getTotalCount(String employee_id);
 }

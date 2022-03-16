@@ -19,9 +19,9 @@ public class Employeecontroller {
     Employeeservice employeeservice;
 
     @GetMapping("getPageCount")
-    public ResponseEntity getTotalPage(){
+    public ResponseEntity getTotalPage(String employee_id){
         Newresponse res = new Newresponse();
-        res.setMessage(employeeservice.getPage());
+        employeeservice.getPage(employee_id);
         return ResponseEntity.ok(res);
     }
     @GetMapping("getTotalCount")

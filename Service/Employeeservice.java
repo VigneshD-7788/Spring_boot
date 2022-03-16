@@ -13,6 +13,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class Employeeservice {
@@ -24,10 +25,11 @@ public class Employeeservice {
     @Autowired
     EntityManager em;
 
-    public String getPage(){
+    public Optional<Employeemodel> getPage(String employee_id){
         Newresponse res = new Newresponse();
-        employeerepos.getTotalCount();
-       return res.getMessage();
+        Optional<Employeemodel> employeemodel=employeerepos.getTotalCount(employee_id);
+        res.setMessage(employee_id);
+       return employeemodel;
     }
 
     public List<Employeemodel> searchEmployee(int pageNo){
