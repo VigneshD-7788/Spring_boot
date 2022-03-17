@@ -19,10 +19,16 @@ public class Employeecontroller {
     Employeeservice employeeservice;
 
     @GetMapping("getPageCount")
-    public ResponseEntity getTotalPage(String employee_id){
+    public ResponseEntity getTotalPage() {
         Newresponse res = new Newresponse();
-        employeeservice.getPage(employee_id);
-        return ResponseEntity.ok(res);
+        try {
+            Integer count = employeeservice.getPage();
+            res.setMessage("" + count);
+            return ResponseEntity.ok(res);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(res);
+        }
+    // Below is the customized get mapping for page count //
     }
     @GetMapping("getTotalCount")
     public ResponseEntity<?> getTotalPages(){
@@ -32,10 +38,10 @@ public class Employeecontroller {
     }
 
     @GetMapping("getPage")
-    public ResponseEntity searchStudent(@RequestParam(required = false) Integer pageNo){
+    public ResponseEntity searchEmployeePage(@RequestParam(required = false) Integer pageNo){
         Newresponse res= new Newresponse();
         try{
-            return ResponseEntity.ok(employeeservice.searchEmployee(pageNo));
+            return ResponseEntity.ok(employeeservice.searchEmployeePage(pageNo));
         }catch(Exception e){
             return ResponseEntity.badRequest().body(res);
         }

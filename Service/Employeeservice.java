@@ -2,7 +2,6 @@ package com.Springboot_web_rest.Service;
 
 import com.Springboot_web_rest.Model.Employeemodel;
 import com.Springboot_web_rest.Repos.Employeerepos;
-import com.Springboot_web_rest.Response.Newresponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class Employeeservice {
@@ -25,20 +23,18 @@ public class Employeeservice {
     @Autowired
     EntityManager em;
 
-    public Optional<Employeemodel> getPage(String employee_id){
-        Newresponse res = new Newresponse();
-        Optional<Employeemodel> employeemodel=employeerepos.getTotalCount(employee_id);
-        res.setMessage(employee_id);
-       return employeemodel;
+    public Integer getPage(){
+       Integer count = employeerepos.getTotalCount();
+       return count;
     }
 
-    public List<Employeemodel> searchEmployee(int pageNo){
+    public List<Employeemodel> searchEmployeePage(int pageNo){
         int totalCount = 10;
-        int pagePos = pageNo*totalCount;
+//      int page = pageNo*totalCount;
         CriteriaBuilder cb= em.getCriteriaBuilder();
         CriteriaQuery<Employeemodel> cq= cb.createQuery(Employeemodel.class);
 
         Root<Employeemodel> employeeModel = cq.from(Employeemodel.class);//get class from criteria query
-        return em.createQuery(cq).setFirstResult(pageNo).setMaxResults(10).getResultList();
+        return em.createQuery(cq).setFirstResult(pageNo).setMaxResults(totalCount).getResultList();
     }
 }
