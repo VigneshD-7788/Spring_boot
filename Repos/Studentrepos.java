@@ -25,6 +25,11 @@ public interface Studentrepos extends JpaRepository<Studentmodel,Integer> {
 
     @Transactional
     @Modifying
+    @Query("update Studentmodel student set student.token=?1 where student.student_id=?2")
+    void updateTokenByUserId(String token,Integer id);
+
+    @Transactional
+    @Modifying
     @Query("update Studentmodel student set student.profile_image=?2 where student.student_id=?1")
     void updateProfileImageByStudentId(Integer student_id,String profile_image);
 

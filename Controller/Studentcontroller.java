@@ -2,6 +2,7 @@ package com.Springboot_web_rest.Controller;
 
 import com.Springboot_web_rest.Model.Studentmodel;
 import com.Springboot_web_rest.Request.Studentrequest;
+import com.Springboot_web_rest.Response.Newresponse;
 import com.Springboot_web_rest.Response.Studentresponse;
 import com.Springboot_web_rest.Service.Studentservice;
 import org.apache.commons.io.IOUtils;
@@ -57,6 +58,14 @@ public class Studentcontroller {
             logger.error(e.getMessage());
            throw new RuntimeException(e.getMessage());
         }
+    }
+
+    @PostMapping("studentLogout/{id}")
+    public ResponseEntity studentLogout(@PathVariable Integer id) {
+        logger.info("Going to logout from book portal");
+        Newresponse res = studentservice.userUpdateToken("  ", id);
+        logger.info("You are successfully logout from book portal");
+        return ResponseEntity.ok(res);
     }
 
     @PostMapping("insertBookRequest")

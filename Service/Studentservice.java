@@ -9,6 +9,7 @@ import com.Springboot_web_rest.Repos.BookHistoryRepos;
 import com.Springboot_web_rest.Repos.Rolerepos;
 import com.Springboot_web_rest.Repos.Studentrepos;
 import com.Springboot_web_rest.Request.Studentrequest;
+import com.Springboot_web_rest.Response.Newresponse;
 import com.Springboot_web_rest.Response.Studentresponse;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -119,6 +120,17 @@ public class Studentservice {
             return studentresponse;
         } else {
             throw new Exception("Login failed, Please try again.....");
+        }
+    }
+
+    public Newresponse userUpdateToken(String token, Integer id) {
+          Newresponse res = new Newresponse();
+        try {
+            studentrepos.updateTokenByUserId(token, id);
+            res.setMessage("You are successfully logout from book portal,Please visit again!");
+            return res;
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
         }
     }
 
