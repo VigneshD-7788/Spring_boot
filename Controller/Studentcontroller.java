@@ -60,7 +60,7 @@ public class Studentcontroller {
         }
     }
 
-    @PostMapping("studentLogout/{id}")
+    @GetMapping("studentLogout/{id}")
     public ResponseEntity studentLogout(@PathVariable Integer id) {
         logger.info("Going to logout from book portal");
         Newresponse res = studentservice.userUpdateToken("  ", id);
