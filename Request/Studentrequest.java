@@ -8,6 +8,56 @@ public class Studentrequest {
     String name,email,password;
     @NotBlank(message = "type is Mandatory")
     String type;
+    String old_password,new_password,confirm_password;
+    String old_name,new_name,confirm_name;
+
+    public String getConfirm_name() {
+        return confirm_name;
+    }
+
+    public void setConfirm_name(String confirm_name) {
+        this.confirm_name = confirm_name;
+    }
+
+    public String getOld_name() {
+        return old_name;
+    }
+
+    public void setOld_name(String old_name) {
+        this.old_name = old_name;
+    }
+
+    public String getNew_name() {
+        return new_name;
+    }
+
+    public void setNew_name(String new_name) {
+        this.new_name = new_name;
+    }
+
+    public String getOld_password() {
+        return old_password;
+    }
+
+    public void setOld_password(String old_password) {
+        this.old_password = old_password;
+    }
+
+    public String getNew_password() {
+        return new_password;
+    }
+
+    public void setNew_password(String new_password) {
+        this.new_password = new_password;
+    }
+
+    public String getConfirm_password() {
+        return confirm_password;
+    }
+
+    public void setConfirm_password(String confirm_password) {
+        this.confirm_password = confirm_password;
+    }
 
     public Integer getBook_id() {
         return book_id;

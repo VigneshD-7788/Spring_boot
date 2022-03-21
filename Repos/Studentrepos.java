@@ -36,5 +36,15 @@ public interface Studentrepos extends JpaRepository<Studentmodel,Integer> {
     @Query("select student from Studentmodel student where student.student_id=?1 ")
     Optional<Studentmodel> getRoleByStudentId(Integer student_id);
 
+    @Modifying
+    @Transactional
+    @Query("update Studentmodel  set password=?1 where student_id=?2")
+    void updatepassword(String password, Integer id);
+
+    @Modifying
+    @Transactional
+    @Query("update Studentmodel  set name=?1 where student_id=?2")
+    void updatename(String name, Integer id);
+
 
 }

@@ -68,6 +68,35 @@ public class Studentcontroller {
         return ResponseEntity.ok(res);
     }
 
+    @PostMapping("updatePassword")
+    public ResponseEntity updatePassword(@RequestBody Studentrequest req) {
+        Newresponse res = new Newresponse();
+        try {
+            logger.info("Going to Update Your Password");
+            studentservice.updatePassword(req);
+            res.setMessage("Password Updated Successfully");
+            return ResponseEntity.ok(res);
+        } catch (Exception e) {
+            logger.error("Unable to Update your Password");
+          throw new RuntimeException(e.getMessage());
+
+        }
+    }
+    @PostMapping("updateName")
+    public ResponseEntity updateName(@RequestBody Studentrequest req){
+        Newresponse res = new Newresponse();
+        try {
+            logger.info("Going to Update Your Name");
+            studentservice.updateName(req);
+            res.setMessage("Name Updated Successfully");
+            return ResponseEntity.ok(res);
+        } catch (Exception e) {
+            logger.error("Unable to Update your name");
+            throw new RuntimeException(e.getMessage());
+
+        }
+    }
+
     @PostMapping("insertBookRequest")
     public ResponseEntity insertBookRequest(@Valid @RequestBody Studentrequest studentrequest) {
         logger.info("START");

@@ -208,6 +208,31 @@ public class Studentservice {
             return false;
         }
     }
+    public boolean updatePassword(Studentrequest req) throws Exception {
+        Optional<Studentmodel> studentmodel = studentrepos.findById(req.getStudent_id());
+        if (studentmodel.isPresent()) {
+            Studentmodel model = studentmodel.get();
+            logger.info(model.getPassword() + "" + req.getOld_password());
+            if (model.getPassword().equals(req.getOld_password())) {
+                if (req.getNew_password().equals(req.getConfirm_password())) {
+                    studentrepos.updatepassword(req.getNew_password(), req.getStudent_id());
+                } else {
+                    throw new Exception("new password and confirm password does not match");
+                }
+            } else {
+                throw new Exception("existing password does not match");
+            }
+        }
+        return true;
+    }
+    public boolean updateName(Studentrequest req){
+        Optional<Studentmodel> studentmodel = studentrepos.findById(req.getStudent_id());
+        if (studentmodel.isPresent()) {
+            studentrepos.updatename(req.getName(), req.getStudent_id());
+        }
+        return true;
+
+    }
     public void uploadProfileImage(String profile_image, Integer student_id) {
         studentrepos.updateProfileImageByStudentId(student_id,profile_image);
     }
