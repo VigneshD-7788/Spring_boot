@@ -9,31 +9,6 @@ public class Studentrequest {
     @NotBlank(message = "type is Mandatory")
     String type;
     String old_password,new_password,confirm_password;
-    String old_name,new_name,confirm_name;
-
-    public String getConfirm_name() {
-        return confirm_name;
-    }
-
-    public void setConfirm_name(String confirm_name) {
-        this.confirm_name = confirm_name;
-    }
-
-    public String getOld_name() {
-        return old_name;
-    }
-
-    public void setOld_name(String old_name) {
-        this.old_name = old_name;
-    }
-
-    public String getNew_name() {
-        return new_name;
-    }
-
-    public void setNew_name(String new_name) {
-        this.new_name = new_name;
-    }
 
     public String getOld_password() {
         return old_password;
