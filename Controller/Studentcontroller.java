@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -160,6 +161,10 @@ public class Studentcontroller {
             Studentmodel studentmodel = studentservice.getStudentById(id);
             logger.info("file select");
             String fileWithPath = UPLOADED_FOLDER + studentmodel.getProfile_image();
+            File file = new File(fileWithPath);
+            if(!file.exists()){
+                fileWithPath= UPLOADED_FOLDER+"no_image.jpg";
+            }
             logger.info("file path {}", fileWithPath);
             InputStream in = new FileInputStream(fileWithPath);
             return IOUtils.toByteArray(in);
@@ -172,6 +177,7 @@ public class Studentcontroller {
     @PostMapping("uploadProfileImage")
     public ResponseEntity uploadProfileImage(@RequestParam MultipartFile file, @RequestParam Integer student_id) {
         logger.info("Success");
+        Newresponse res =new Newresponse();
         try {
             logger.info("Profile Image Uploaded");
             logger.info(file.getContentType());
@@ -179,7 +185,8 @@ public class Studentcontroller {
             Path path = Paths.get(File_Name, file.getOriginalFilename());
             Files.write(path, file.getBytes());
             studentservice.uploadProfileImage(file.getOriginalFilename(), student_id);
-            return ResponseEntity.ok("Profile Image Uploaded Successfully" + ":" + file.getOriginalFilename());
+            res.setMessage("Profile Image Uploaded Successfully" + ":"+ file.getOriginalFilename());
+            return ResponseEntity.ok(res);
         } catch (Exception e) {
             logger.error("Unable to upload your file");
             return ResponseEntity.badRequest().body(e.getMessage());
